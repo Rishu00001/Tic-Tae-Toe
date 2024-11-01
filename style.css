@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+body {
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  color: #fff;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container h1 {
+  margin-bottom: 40px;
+  text-decoration: underline;
+}
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+}
+.cell {
+  border: 2px solid rgb(183, 106, 106);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  font-weight: 600;
+  height: 120px;
+  cursor: pointer;
+}
+.cell.disabled {
+  background-color: #dbabab;
+}
+
+/* Remove outer borders */
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+  border-bottom: none;
+}
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+  border-left: none;
+}
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+  border-right: none;
+}
+.gameplayers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.player {
+  margin-inline: 18px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.restartbtn {
+  border: none;
+  background: #642e2e;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-block: 18px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px #8b8bb4;
+}
+.restartbtn:hover {
+  background-color: #aa4a4a;
+}
+.alertbox {
+  position: absolute;
+  top: 0;
+  background-color: #dbabab;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(160, 24, 24);
+  height: 40px;
+   display: none;
+}
+@media screen and (max-width: 550px) {
+  .gameboard {
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+  }
+  .cell {
+    height: 90px;
+  }
+}
