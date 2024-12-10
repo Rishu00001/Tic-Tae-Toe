@@ -9,7 +9,7 @@ let tie = new Audio("tie.mp3");
 
 // Making variables
 let currPlayer = "X"; // Human
-let aiPlayer = "O";   // AI
+let aiPlayer = "O"; // AI
 let playerTurn = currPlayer; // Current turn
 
 player1.textContent = `Player 1 (You): ${currPlayer}`;
@@ -47,8 +47,29 @@ const handleClick = (e) => {
 
 // AI Move Function
 const aiMove = () => {
-  const emptyCells = Array.from(gameCells).filter(cell => cell.textContent === "");
+  const emptyCells = Array.from(gameCells).filter(
+    (cell) => cell.textContent === ""
+  );
+  const random = Math.floor(Math.random() * 5) + 1;
+  console.log(random);
+  if (random > 0 && random <= 2) {
+    const randomCell =
+      emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    randomCell.textContent = aiPlayer;
 
+    if (checkWin()) {
+      winsound.play();
+      showAlert(`YOU LOSE THE GAME!!`);
+      disableCells();
+    } else if (checkTie()) {
+      tie.play();
+      showAlert("It's a tie!");
+      disableCells();
+    } else {
+      changeTurn(); // Switch back to human player
+    }
+    return;
+  }
   // Step 1: Check for a winning move
   for (let cell of emptyCells) {
     cell.textContent = aiPlayer;
@@ -136,9 +157,6 @@ const aiMove = () => {
     changeTurn(); // Switch back to human player
   }
 };
-
-
-
 
 // Change player turn
 const changeTurn = () => {
