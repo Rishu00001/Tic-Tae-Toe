@@ -32,20 +32,20 @@ const handleClick = (e) => {
       showAlert(`${playerTurn} is the winner!`);
       disableCells();
     } else if (checkTie()) {
-      tie.play();
+      tie.play(); //tie audio plays
       showAlert("It's a tie!");
-      disableCells();
+      disableCells(); //stops new move
     } else {
       ting.play();
       changeTurn();
 
-      // AI takes its turn after a short delay
+      //machine takes time
       setTimeout(aiMove, 1500);
     }
   }
 };
 
-// AI Move Function
+// AI Move 
 const aiMove = () => {
   const emptyCells = Array.from(gameCells).filter(
     (cell) => cell.textContent === ""
@@ -90,7 +90,7 @@ const aiMove = () => {
       if (checkWin()) {
         winsound.play();
         showAlert(`YOU LOSE THE GAME!!`);
-        disableCells(); // Block and win
+        disableCells(); // Block the cells and win
         return;
       } else if (checkTie()) {
         tie.play();
@@ -104,7 +104,7 @@ const aiMove = () => {
     cell.textContent = ""; // Undo the move
   }
 
-  // Step 3: Pick a strategic position (center first, then corners)
+  // 3: Pick a strategic position first center then corners
   const centerCell = gameCells[4];
   if (centerCell.textContent === "") {
     centerCell.textContent = aiPlayer;
@@ -141,7 +141,7 @@ const aiMove = () => {
     }
   }
 
-  // Step 4: Pick a random empty cell as a fallback
+  // Step 4: Pick a random empty cell (backup move)
   const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
   randomCell.textContent = aiPlayer;
 
