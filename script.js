@@ -3,7 +3,9 @@ const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
 const restartBtn = document.querySelector('.restartbtn')
 const alertbox = document.querySelector('.alertbox')
-
+let ting = new Audio('ting.mp3');
+let winsound = new Audio('winner.mp3.mp3');
+let tie = new Audio('tie.mp3');
 //making variables
 let currPlayer = "X";
 let nextPlayer = "O";
@@ -23,12 +25,15 @@ const startGame = () => {
     if (e.target.textContent === "") {
         e.target.textContent = playerTurn;
         if (checkWin()) {
+          winsound.play();
           showAlert(`${playerTurn} is the winner!`);
           disableCells()
         } else if (checkTie()) {
+          tie.play();
           showAlert("It's a tie!");
           disableCells()
         } else {
+          ting.play();
           changeTurn();
         }
       }

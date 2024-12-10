@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Roboto&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +29,7 @@ body {
 }
 .container h1 {
   margin-bottom: 40px;
-  text-decoration: underline;
+  font-family: "Baloo bhaina 2";
 }
 .gameboard {
   display: grid;
