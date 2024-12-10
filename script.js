@@ -1,4 +1,4 @@
-const gameCells = document.querySelectorAll(".cell");
+const gameCells = document.querySelectorAll(".cell"); //nodelist of all the cells
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
 const restartBtn = document.querySelector('.restartbtn')
@@ -9,7 +9,7 @@ let tie = new Audio('tie.mp3');
 //making variables
 let currPlayer = "X";
 let nextPlayer = "O";
-let playerTurn = currPlayer;
+let playerTurn = currPlayer; //current turn player
 
 player1.textContent = `Player 1: ${currPlayer}`
 player2.textContent = `Player 2: ${nextPlayer}`
@@ -27,11 +27,11 @@ const startGame = () => {
         if (checkWin()) {
           winsound.play();
           showAlert(`${playerTurn} is the winner!`);
-          disableCells()
+          disableCells(); //disable the cells if someone wins
         } else if (checkTie()) {
           tie.play();
           showAlert("It's a tie!");
-          disableCells()
+          disableCells(); //disable the cells when it is a tie
         } else {
           ting.play();
           changeTurn();
@@ -85,7 +85,7 @@ const checkTie = () => {
 const disableCells = ()=>{
     gameCells.forEach(cells=>{
         cells.removeEventListener('click',handleClick)
-        cells.classList.add('disabled')
+        cells.classList.add('disabled'); //added a class for css
     })
 }
 //Function to restart game
