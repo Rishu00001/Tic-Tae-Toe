@@ -174,7 +174,7 @@ const changeTurn = () => {
     } else if (playerTurn === "O") {
       document.getElementById('machineimg').style.border = "3px solid green";
     }
-  },800)
+  },500)
 };
 
 
