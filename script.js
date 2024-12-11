@@ -11,13 +11,9 @@ let tie = new Audio("tie.mp3");
 let currPlayer = "X"; // Human
 let aiPlayer = "O"; // AI
 let playerTurn = currPlayer; // Current turn
-if (playerTurn === "X") {
-  document.getElementById('humanimg').style.border = "3px solid green";
-} else if (playerTurn === "O") {
-  document.getElementById('machineimg').style.border = "3px solid green";
-}
 // Game starter function
 const startGame = () => {
+  displayTurns(); //displaying the player turn
   gameCells.forEach((cell) => {
     cell.addEventListener("click", handleClick);
   });
@@ -41,7 +37,7 @@ const handleClick = (e) => {
       changeTurn();
 
       //machine takes time
-      setTimeout(aiMove, 2500);
+      setTimeout(aiMove, 2000);
     }
   }
 };
@@ -164,19 +160,12 @@ const changeTurn = () => {
   playerTurn = playerTurn === currPlayer ? aiPlayer : currPlayer;
 
   // Reset borders
-  document.getElementById('humanimg').style.border = "none";
-  document.getElementById('machineimg').style.border = "none";
+  document.getElementById("humanimg").style.border = "none";
+  document.getElementById("machineimg").style.border = "none";
 
   // Set green border for the current player
-  setTimeout(function(){
-    if (playerTurn === "X") {
-      document.getElementById('humanimg').style.border = "3px solid green";
-    } else if (playerTurn === "O") {
-      document.getElementById('machineimg').style.border = "3px solid green";
-    }
-  },500)
+  setTimeout(displayTurns,500);
 };
-
 
 // A function to check for a win
 const checkWin = () => {
@@ -224,6 +213,8 @@ const disableCells = () => {
 
 // Function to restart the game
 const restartGame = () => {
+  document.getElementById("humanimg").style.border = "none";
+  document.getElementById("machineimg").style.border = "none";
   gameCells.forEach((cell) => {
     cell.textContent = "";
     cell.classList.remove("disabled");
@@ -243,6 +234,16 @@ const showAlert = (msg) => {
 
 // Restart button functionality
 restartBtn.addEventListener("click", restartGame);
+//function to displayTurns
+
+function displayTurns(){
+  if (playerTurn === "X") {
+    document.getElementById("humanimg").style.border = "3px solid green";
+  } else if (playerTurn === "O") {
+    document.getElementById("machineimg").style.border = "3px solid green";
+  }
+}
+
 
 // Start the game
 startGame();
