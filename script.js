@@ -11,10 +11,11 @@ let tie = new Audio("tie.mp3");
 let currPlayer = "X"; // Human
 let aiPlayer = "O"; // AI
 let playerTurn = currPlayer; // Current turn
-
-player1.textContent = `Player 1 (You): ${currPlayer}`;
-player2.textContent = `AI Player: ${aiPlayer}`;
-
+if (playerTurn === "X") {
+  document.getElementById('humanimg').style.border = "3px solid green";
+} else if (playerTurn === "O") {
+  document.getElementById('machineimg').style.border = "3px solid green";
+}
 // Game starter function
 const startGame = () => {
   gameCells.forEach((cell) => {
@@ -40,12 +41,12 @@ const handleClick = (e) => {
       changeTurn();
 
       //machine takes time
-      setTimeout(aiMove, 1500);
+      setTimeout(aiMove, 2500);
     }
   }
 };
 
-// AI Move 
+// AI Move
 const aiMove = () => {
   const emptyCells = Array.from(gameCells).filter(
     (cell) => cell.textContent === ""
@@ -161,7 +162,21 @@ const aiMove = () => {
 // Change player turn
 const changeTurn = () => {
   playerTurn = playerTurn === currPlayer ? aiPlayer : currPlayer;
+
+  // Reset borders
+  document.getElementById('humanimg').style.border = "none";
+  document.getElementById('machineimg').style.border = "none";
+
+  // Set green border for the current player
+  setTimeout(function(){
+    if (playerTurn === "X") {
+      document.getElementById('humanimg').style.border = "3px solid green";
+    } else if (playerTurn === "O") {
+      document.getElementById('machineimg').style.border = "3px solid green";
+    }
+  },800)
 };
+
 
 // A function to check for a win
 const checkWin = () => {
