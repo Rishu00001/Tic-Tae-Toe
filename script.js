@@ -6,7 +6,7 @@ const alertbox = document.querySelector(".alertbox");
 let ting = new Audio("ting.mp3");
 let winsound = new Audio("winner.mp3.mp3");
 let tie = new Audio("tie.mp3");
-
+let aimove = 0; //ud
 // Making variables
 let currPlayer = "X"; // Human
 let aiPlayer = "O"; // AI
@@ -41,12 +41,31 @@ const handleClick = (e) => {
     }
   }
 };
-
 // AI Move
 const aiMove = () => {
   const emptyCells = Array.from(gameCells).filter(
     (cell) => cell.textContent === ""
   );
+  if (aimove === 1) {
+    const corners = [0, 2, 6, 8];
+    const gamecellsArray = Array.from(gameCells);
+    if (
+      gamecellsArray[corners[0]].textContent === "X" &&
+      gamecellsArray[corners[3]].textContent === "X"
+    ) {
+      gamecellsArray[3].textContent = "O";
+      changeTurn();
+      return;
+    }
+    if (
+      gamecellsArray[corners[1]].textContent === "X" &&
+      gamecellsArray[corners[2]].textContent === "X"
+    ) {
+      gamecellsArray[3].textContent = "O";
+      changeTurn();
+      return;
+    }
+  }
   // const random = Math.floor(Math.random() * 5) + 1;
   // console.log(random);
   // if (random > 0 && random <= 2) {
@@ -78,7 +97,6 @@ const aiMove = () => {
     }
     cell.textContent = ""; // Undo the move
   }
-
   // Step 2: Block the opponent's winning move
   for (let cell of emptyCells) {
     cell.textContent = currPlayer;
@@ -100,7 +118,6 @@ const aiMove = () => {
     }
     cell.textContent = ""; // Undo the move
   }
-
   // 3: Pick a strategic position first center then corners
   const centerCell = gameCells[4];
   if (centerCell.textContent === "") {
@@ -118,7 +135,6 @@ const aiMove = () => {
     }
     return;
   }
-
   const corners = [0, 2, 6, 8];
   for (let index of corners) {
     if (gameCells[index].textContent === "") {
@@ -137,11 +153,9 @@ const aiMove = () => {
       return;
     }
   }
-
   // Step 4: Pick a random empty cell (backup move)
   const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
   randomCell.textContent = aiPlayer;
-
   if (checkWin()) {
     winsound.play();
     showAlert(`YOU LOSE THE GAME!!`);
@@ -154,19 +168,17 @@ const aiMove = () => {
     changeTurn(); // Switch back to human player
   }
 };
-
 // Change player turn
 const changeTurn = () => {
+  if (playerTurn === "O") aimove++;
+  console.log(aimove);
   playerTurn = playerTurn === currPlayer ? aiPlayer : currPlayer;
-
   // Reset borders
   document.getElementById("humanimg").style.border = "none";
   document.getElementById("machineimg").style.border = "none";
-
   // Set green border for the current player
-  setTimeout(displayTurns,500);
+  setTimeout(displayTurns, 500);
 };
-
 // A function to check for a win
 const checkWin = () => {
   const winningConditions = [
@@ -191,7 +203,6 @@ const checkWin = () => {
   }
   return false;
 };
-
 // A function to check for a tie
 const checkTie = () => {
   let empty = 0;
@@ -202,7 +213,6 @@ const checkTie = () => {
   });
   return empty === 0 && !checkWin();
 };
-
 // A function to disable cells
 const disableCells = () => {
   gameCells.forEach((cell) => {
@@ -210,9 +220,9 @@ const disableCells = () => {
     cell.classList.add("disabled");
   });
 };
-
 // Function to restart the game
 const restartGame = () => {
+  aimove = 0;
   document.getElementById("humanimg").style.border = "none";
   document.getElementById("machineimg").style.border = "none";
   gameCells.forEach((cell) => {
@@ -236,14 +246,12 @@ const showAlert = (msg) => {
 restartBtn.addEventListener("click", restartGame);
 //function to displayTurns
 
-function displayTurns(){
+function displayTurns() {
   if (playerTurn === "X") {
     document.getElementById("humanimg").style.border = "3px solid green";
   } else if (playerTurn === "O") {
     document.getElementById("machineimg").style.border = "3px solid green";
   }
 }
-
-
 // Start the game
 startGame();

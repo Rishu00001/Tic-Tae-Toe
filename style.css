@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Roboto&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -130,20 +130,16 @@ footer p {
 footer {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
-  padding: 5px 10px; 
-  height: auto; 
-  min-height: 60px; 
-  overflow: hidden; 
+  align-items: center;
+  padding: 5px 10px;
+  height: auto;
+  min-height: 60px;
+  overflow: hidden;
 }
 
 .footer-image img {
-  max-height: 50px; 
-  width: 50px; 
-  box-shadow:-1px 2px 4px black;
+  max-height: 50px;
+  width: 50px;
+  box-shadow: -1px 2px 4px black;
   border-radius: 5px;
 }
-
-
-
-
