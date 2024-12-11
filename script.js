@@ -48,7 +48,7 @@ const aiMove = () => {
   );
   if (aimove === 1) {
     const corners = [0, 2, 6, 8];
-    const blackspots = [5,7];
+    const blackspots = [5,6,7];
     const gamecellsArray = Array.from(gameCells);
     if (
       gamecellsArray[corners[0]].textContent === "X" &&
@@ -63,6 +63,14 @@ const aiMove = () => {
       gamecellsArray[corners[2]].textContent === "X"
     ) {
       gamecellsArray[3].textContent = "O";
+      changeTurn();
+      return;
+    }
+    if (
+      gamecellsArray[blackspots[0]].textContent === "X" &&
+      gamecellsArray[blackspots[2]].textContent === "X"
+    ) {
+      gamecellsArray[8].textContent = "O";
       changeTurn();
       return;
     }
